@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ombi.fullname" . }}-deployment
+  labels:
+    app: ombi
+  {{- include "ombi.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: ombi
+    {{- include "ombi.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: ombi
+      {{- include "ombi.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - image: {{ .Values.deployment.ombi.image.repository }}:{{ .Values.deployment.ombi.image.tag
+          | default .Chart.AppVersion }}
+        name: ombi
+        ports:
+        - containerPort: 3579
+        resources: {}
+        volumeMounts:
+        - mountPath: /config
+          name: ombi-config
+      nodeSelector:
+        name: node4
+      volumes:
+      - name: ombi-config
+        persistentVolumeClaim:
+          claimName: ombi-config-pvc

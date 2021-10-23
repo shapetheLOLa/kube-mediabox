@@ -1,0 +1,12 @@
+deployment:
+  ombi:
+    image:
+      repository: linuxserver/ombi
+      tag: latest
+  replicas: 1
+service:
+  ports:
+  - port: 3579
+    protocol: TCP
+    targetPort: 3579
+  type: ClusterIP

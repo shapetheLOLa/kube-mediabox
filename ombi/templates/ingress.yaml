@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "ombi.fullname" . }}-ingress
+  labels:
+  {{- include "ombi.labels" . | nindent 4 }}
+  annotations:
+    cert-manager.io/issuer: letsencrypt-prod
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/proxy-body-size: 16m
+    nginx.org/client-max-body-size: "0"
+    nginx.org/proxy-connect-timeout: 600s
+    nginx.org/proxy-read-timeout: 600s
+spec:
+  rules:
+  - host: ombi.jplex.xyz
+    http:
+      paths:
+      - backend:
+          service:
+            name: ombi-service
+            port:
+              number: 3579
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - ombi.jplex.xyz
+    secretName: ombi-tls

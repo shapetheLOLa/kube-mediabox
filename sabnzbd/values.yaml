@@ -1,0 +1,19 @@
+deployment:
+  replicas: 1
+  sabnzbd:
+    image:
+      repository: linuxserver/sabnzbd
+      tag: latest
+    resources:
+      limits:
+        cpu: "1"
+        memory: 2G
+      requests:
+        cpu: "1"
+        memory: 2G
+service:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  type: ClusterIP

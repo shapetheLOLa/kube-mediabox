@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "plex.fullname" . }}-server
+  labels:
+    name: plex-server
+  {{- include "plex.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.server.replicas }}
+  selector:
+    matchLabels:
+      name: plex-server
+    {{- include "plex.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        name: plex-server
+      {{- include "plex.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - env:
+        - name: PLEX_UID
+          value: "911"
+        - name: PLEX_GID
+          value: "911"
+        - name: VERSION
+          value: docker
+        - name: UMASK_SET
+          value: "022"
+        - name: TZ
+          value: Europe/Berlin
+        image: {{ .Values.server.plexServer.image.repository }}:{{ .Values.server.plexServer.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          initialDelaySeconds: 60
+          periodSeconds: 5
+          tcpSocket:
+            port: 32400
+        name: plex-server
+        resources: {}
+        volumeMounts:
+        - mountPath: /config
+          name: plex-config
+        - mountPath: /data
+          name: media
+      hostNetwork: true
+      volumes:
+      - name: plex-config
+        persistentVolumeClaim:
+          claimName: plex-config-pvc
+      - hostPath:
+          path: /mnt/unionfs/Media
+        name: media

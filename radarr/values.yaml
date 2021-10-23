@@ -1,0 +1,12 @@
+deployment:
+  radarr:
+    image:
+      repository: linuxserver/radarr
+      tag: latest
+  replicas: 1
+service:
+  ports:
+  - port: 7878
+    protocol: TCP
+    targetPort: 7878
+  type: ClusterIP

@@ -1,0 +1,6 @@
+server:
+  plexServer:
+    image:
+      repository: plexinc/pms-docker
+      tag: beta
+  replicas: 1

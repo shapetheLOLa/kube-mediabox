@@ -1,0 +1,19 @@
+deployment:
+  replicas: 1
+  sonarr:
+    image:
+      repository: linuxserver/sonarr
+      tag: latest
+    resources:
+      limits:
+        cpu: "1"
+        memory: 2G
+      requests:
+        cpu: "1"
+        memory: 2G
+service:
+  ports:
+  - port: 8989
+    protocol: TCP
+    targetPort: 8989
+  type: ClusterIP
