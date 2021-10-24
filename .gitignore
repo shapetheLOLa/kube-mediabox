@@ -4,3 +4,4 @@
 /radarr/.helmignore
 /sabnzbd/.helmignore
 /sonarr/.helmignore
+/.idea/
