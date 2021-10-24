@@ -40,4 +40,4 @@ spec:
         name: mnt
       - name: media-pv-data
         persistentVolumeClaim:
-          claimName: media-pv-claim
+          claimName: media-pv-pvc-claim

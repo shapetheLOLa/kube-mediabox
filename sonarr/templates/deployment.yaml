@@ -37,4 +37,4 @@ spec:
           claimName: sonarr-config-pvc
       - name: media-pv-data
         persistentVolumeClaim:
-          claimName: media-pv-claim
+          claimName: media-pv-pvc-claim
