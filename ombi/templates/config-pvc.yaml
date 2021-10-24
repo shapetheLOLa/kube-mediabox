@@ -6,7 +6,7 @@ metadata:
   {{- include "ombi.labels" . | nindent 4 }}
 spec:
   accessModes:
-  - ReadWriteMany
+  - ReadWriteOnce
   resources:
     requests:
       storage: 40Gi

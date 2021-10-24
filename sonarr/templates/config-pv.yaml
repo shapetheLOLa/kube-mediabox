@@ -8,7 +8,7 @@ metadata:
   {{- include "sonarr.labels" . | nindent 4 }}
 spec:
   accessModes:
-  - ReadWriteMany
+  - ReadWriteOnce
   capacity:
     storage: 40Gi
   nfs:
