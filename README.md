@@ -1,6 +1,8 @@
 # kube-mediabox
 mediabox services for kubernetes via helm
 
+This is still very basic and a WIP. But its working for now.
+
 Services:
 
 plex  
@@ -48,3 +50,5 @@ If you havent, delete the following on each ingress, e.g. service.yaml in /radar
     - radarr.jplex.xyz
     secretName: radarr-tls
 ```
+
+If you run into permission issues try to chown the folders first before installing via helm.
