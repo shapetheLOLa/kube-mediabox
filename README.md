@@ -36,3 +36,13 @@ Then install the services:
 ``` helm install ombi ./ombi ```
 
 please make sure that UID and GID of folders that are used are set to '911'
+
+TLS is activated, so this assumes you have letsencrypt running on your cluster.
+
+If you havent, delete the following on each ingress, e.g. service.yaml in /radarr:
+```
+  tls:
+  - hosts:
+    - radarr.jplex.xyz
+    secretName: radarr-tls
+```
