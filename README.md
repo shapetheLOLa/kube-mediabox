@@ -26,6 +26,18 @@ In my case plex and services have all the media mounted into /mnt/unionfs/Media/
 Plex has that folder mounted.
 Service that folder via NFS or change it accordingly if you want it on all worker nodes.
 
+Please change hostname of each service under service/templates/ingress.yaml
+you will find e.g.````radarr.yourservice.xyz````
+Change it to your hostname, e.g. ```radarr.mediabox.xyz```
+TLS is activated, so this assumes you have letsencrypt running on your cluster.
+If you havent, delete the following on each ingress, e.g. service.yaml in /radarr:
+```
+  tls:
+  - hosts:
+    - radarr.yourservice.xyz
+    secretName: radarr-tls
+```
+
 First install the media-pv-pvc:
 
 ``` helm install media-pv-pvc ./media-pv-pvc ```
@@ -41,14 +53,5 @@ Then install the services:
 
 please make sure that UID and GID of folders that are used are set to '911'
 
-TLS is activated, so this assumes you have letsencrypt running on your cluster.
-
-If you havent, delete the following on each ingress, e.g. service.yaml in /radarr:
-```
-  tls:
-  - hosts:
-    - radarr.yourservice.xyz
-    secretName: radarr-tls
-```
 
 If you run into permission issues try to chown the folders first before installing via helm.
