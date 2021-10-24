@@ -30,7 +30,7 @@ spec:
         - mountPath: /mnt/
           name: media-pv-data
       nodeSelector:
-        app: sonarr
+        app: mediabox
       volumes:
       - name: sonarr-config
         persistentVolumeClaim:
