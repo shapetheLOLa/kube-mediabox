@@ -1,0 +1,6 @@
+/media-pv-pvc/.helmignore
+/ombi/.helmignore
+/plex/.helmignore
+/radarr/.helmignore
+/sabnzbd/.helmignore
+/sonarr/.helmignore
