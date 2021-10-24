@@ -20,7 +20,9 @@ This PV/PVC is a hostPath mount on the node on /mnt/
 Please label your node accordingly:
 ``` kubectl label node3 app=mediabox ```
 
-
+In my case plex and services have all the media mounted into /mnt/unionfs/Media/ and from there it goes to TV and Movies.
+Plex has that folder mounted.
+Service that folder via NFS or change it accordingly if you want it on all worker nodes.
 
 First install the media-pv-pvc:
 
