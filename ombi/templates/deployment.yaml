@@ -27,8 +27,6 @@ spec:
         volumeMounts:
         - mountPath: /config
           name: ombi-config
-      nodeSelector:
-        name: node4
       volumes:
       - name: ombi-config
         persistentVolumeClaim:
