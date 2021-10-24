@@ -29,10 +29,10 @@ First install the media-pv-pvc:
 
 Then install the services:
 
-``` helm install media-pv-pvc ./media-pv-pvc ```  
 ``` helm install sabnzbd ./sabnzbd ```  
 ``` helm install radarr ./radarr ```  
 ``` helm install sonarr ./sonarr ```  
 ``` helm install plex ./plex ```  
+``` helm install ombi ./ombi ```
 
 please make sure that UID and GID of folders that are used are set to '911'
