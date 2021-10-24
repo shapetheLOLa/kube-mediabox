@@ -8,7 +8,7 @@ metadata:
   {{- include "media-pv-pvc.labels" . | nindent 4 }}
 spec:
   accessModes:
-  - ReadWriteOnce
+  - ReadWriteMany
   capacity:
     storage: 400Gi
   hostPath:
