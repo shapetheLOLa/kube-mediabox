@@ -33,8 +33,8 @@ spec:
         app: mediabox
       volumes:
       - name: sonarr-config
-        persistentVolumeClaim:
-          claimName: sonarr-config-pvc
+        hostPath:
+          path: /config/sonarr
       - name: media-pv-data
         persistentVolumeClaim:
           claimName: media-pv-pvc-claim

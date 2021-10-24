@@ -45,10 +45,12 @@ spec:
         - mountPath: /data
           name: media
       hostNetwork: true
+      nodeSelector:
+        app: mediabox
       volumes:
       - name: plex-config
-        persistentVolumeClaim:
-          claimName: plex-config-pvc
+        hostPath:
+          path: /config/plex
       - hostPath:
           path: /mnt/unionfs/Media
         name: media

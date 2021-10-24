@@ -27,7 +27,9 @@ spec:
         volumeMounts:
         - mountPath: /config
           name: ombi-config
+      nodeSelector:
+        name: node4
       volumes:
       - name: ombi-config
-        persistentVolumeClaim:
-          claimName: ombi-config-pvc
+        hostPath:
+          path: /config/ombi
