@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "media-pv-pvc.fullname" . }}-claim
+  labels:
+  {{- include "media-pv-pvc.labels" . | nindent 4 }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 400Gi
+  storageClassName: manual
