@@ -13,7 +13,7 @@ metadata:
     nginx.org/proxy-read-timeout: 600s
 spec:
   rules:
-  - host: radarr.jplex.xyz
+  - host: radarr.yourservice.xyz
     http:
       paths:
       - backend:
@@ -24,5 +24,5 @@ spec:
         pathType: ImplementationSpecific
   tls:
   - hosts:
-    - radarr.jplex.xyz
+    - radarr.yourservice.xyz
     secretName: radarr-tls

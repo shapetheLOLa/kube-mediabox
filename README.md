@@ -47,7 +47,7 @@ If you havent, delete the following on each ingress, e.g. service.yaml in /radar
 ```
   tls:
   - hosts:
-    - radarr.jplex.xyz
+    - radarr.yourservice.xyz
     secretName: radarr-tls
 ```
 

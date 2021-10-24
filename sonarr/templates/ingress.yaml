@@ -13,7 +13,7 @@ metadata:
     nginx.org/proxy-read-timeout: 600s
 spec:
   rules:
-  - host: sonarr.jplex.xyz
+  - host: sonarr.yourservice.xyz
     http:
       paths:
       - backend:
@@ -24,5 +24,5 @@ spec:
         pathType: ImplementationSpecific
   tls:
   - hosts:
-    - sonarr.jplex.xyz
+    - sonarr.yourservice.xyz
     secretName: sonarr-tls

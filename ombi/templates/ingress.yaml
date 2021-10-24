@@ -13,7 +13,7 @@ metadata:
     nginx.org/proxy-read-timeout: 600s
 spec:
   rules:
-  - host: ombi.jplex.xyz
+  - host: ombi.yourservice.xyz
     http:
       paths:
       - backend:
@@ -24,5 +24,5 @@ spec:
         pathType: ImplementationSpecific
   tls:
   - hosts:
-    - ombi.jplex.xyz
+    - ombi.yourservice.xyz
     secretName: ombi-tls
