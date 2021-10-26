@@ -30,6 +30,9 @@ spec:
       nodeSelector:
         name: node4
       volumes:
+#      - name: ombi-config
+#        persistentVolumeClaim:
+#          claimName: ombi-config
       - name: ombi-config
         hostPath:
           path: /config/ombi

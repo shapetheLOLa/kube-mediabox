@@ -32,9 +32,12 @@ spec:
       nodeSelector:
         app: mediabox
       volumes:
+#      - name: sonarr-config
+#        persistentVolumeClaim:
+#          claimName: sonarr-config
       - name: sonarr-config
         hostPath:
-          path: /config/sonarr
+           path: /config/sonarr
       - name: media-pv-data
         persistentVolumeClaim:
           claimName: media-pv-pvc-claim

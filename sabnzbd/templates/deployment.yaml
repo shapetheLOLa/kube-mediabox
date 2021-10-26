@@ -32,9 +32,12 @@ spec:
       nodeSelector:
         app: mediabox
       volumes:
+#      - name: sabnzbd-config
+#        persistentVolumeClaim:
+#          claimName: sabnzbd-config
       - name: sabnzbd-config
-        persistentVolumeClaim:
-          claimName: sabnzbd-config-pvc
+        hostPath:
+          path: /config/sabnzbd
       - hostPath:
           path: /mnt
         name: mnt

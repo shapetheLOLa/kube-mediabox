@@ -32,6 +32,9 @@ spec:
       nodeSelector:
         app: mediabox
       volumes:
+#      - name: radarr-config
+#        persistentVolumeClaim:
+#           claimName: radarr-config
       - name: radarr-config
         hostPath:
           path: /config/radarr

@@ -48,6 +48,9 @@ spec:
       nodeSelector:
         app: mediabox
       volumes:
+#      - name: plex-config
+#        persistentVolumeClaim:
+#          claimName: plex-config
       - name: plex-config
         hostPath:
           path: /config/plex
