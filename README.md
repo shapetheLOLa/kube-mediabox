@@ -60,6 +60,7 @@ If you run into permission issues try to chown the folders first before installi
 In my own setup I've started running longhorn (https://longhorn.io). Ive created a disk and created 1 volume for each service and created the PV/PVc within longhorn.
 They are named $service-config, e.g. radarr-config.
 
+### Longhorn 
 If you need want to install longhorn for this setup also (see https://longhorn.io/docs/1.2.2/deploy/install/install-with-helm/):
 
 ```helm repo add longhorn https://charts.longhorn.io```  
