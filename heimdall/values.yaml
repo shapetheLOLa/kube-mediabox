@@ -1,0 +1,12 @@
+deployment:
+  heimdall:
+    image:
+      repository: linuxserver/heimdall
+      tag: latest
+  replicas: 1
+service:
+  ports:
+  - port: 6969
+    protocol: TCP
+    targetPort: 80
+  type: ClusterIP
