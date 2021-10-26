@@ -63,5 +63,5 @@ If you need want to install longhorn for this setup also (see https://longhorn.i
 ``` helm repo update```  
 ``` helm install longhorn longhorn/longhorn --namespace longhorn-system --create-namespace```
 
-Create 1 Disk on each node where you want your services running and set replicas of volumes accordingly.
-
+Create 1 Disk on each node where you want your services running and set replicas of volumes accordingly.  
+You can attach, mount the volume in your node, and copy your data locally. Afterwards, deattach the volume again and create the pv/pvc via UI in longhorn.
