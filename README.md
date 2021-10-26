@@ -11,6 +11,9 @@ radarr
 sonarr  
 ombi  
 
+There are 2 ways to mount the config volume for the services. The default way is a local hostPath for a selected node. The other way is to use longhorn.  If you want to use longhorn, you dont need the nodeSelector for the services. Keep in mind that sabnzbd/sonarr/radarr should be on the same node for speed reasons.  
+See instructions in the end.  
+
 For the config of each service the cluster needs it on a cluster with a nodeSelector mediabox. It is supposed to be in /config/{servicename}
 
 There is a pv/pvc for shared mount volume for sabnzbd/sonarr/radarr
