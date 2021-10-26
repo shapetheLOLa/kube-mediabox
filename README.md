@@ -53,3 +53,15 @@ please make sure that UID and GID of folders that are used are set to '911'
 
 
 If you run into permission issues try to chown the folders first before installing via helm.
+
+In my own setup I've started running longhorn (https://longhorn.io). Ive created a disk and created 1 volume for each service and created the PV/PVc within longhorn.
+They are named $service-config, e.g. radarr-config.
+
+If you need want to install longhorn for this setup also (see https://longhorn.io/docs/1.2.2/deploy/install/install-with-helm/):
+
+```helm repo add longhorn https://charts.longhorn.io```  
+``` helm repo update```  
+``` helm install longhorn longhorn/longhorn --namespace longhorn-system --create-namespace```
+
+Create 1 Disk on each node where you want your services running and set replicas of volumes accordingly.
+
