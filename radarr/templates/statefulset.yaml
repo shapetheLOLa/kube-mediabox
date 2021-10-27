@@ -19,7 +19,7 @@ spec:
         {{- include "radarr.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - image: linuxserver/radarr:latest
+      - image: {{ .Values.statefulset.radarr.image.repository }}:{{ .Values.statefulset.radarr.image.tag | default .Chart.AppVersion }}
         name: radarr
         ports:
         - containerPort: 7878
@@ -30,7 +30,7 @@ spec:
         - mountPath: /mnt/
           name: media-pv-data
       nodeSelector:
-        app: mediabox
+        app: {{ .Values.statefulset.radarr.nodeSelector.app }}
       terminationGracePeriodSeconds: 10
       volumes:
       - name: radarr-config

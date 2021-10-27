@@ -13,7 +13,7 @@ metadata:
     nginx.org/proxy-read-timeout: 600s
 spec:
   rules:
-  - host: radarr.yourservice.xyz
+  - host: {{ .Values.ingress.rules.host }} 
     http:
       paths:
       - backend:
@@ -24,5 +24,5 @@ spec:
         pathType: ImplementationSpecific
   tls:
   - hosts:
-    - radarr.yourservice.xyz
+    - {{ .Values.ingress.rules.host }}
     secretName: radarr-tls

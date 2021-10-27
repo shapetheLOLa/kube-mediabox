@@ -1,5 +1,7 @@
 statefulset:
   radarr:
+    nodeSelector:
+      app: mediabox
     image:
       repository: linuxserver/radarr
       tag: latest
@@ -10,3 +12,6 @@ service:
     protocol: TCP
     targetPort: 7878
   type: ClusterIP
+ingress:
+  rules:
+    host: radarr.yourservice.xyz
