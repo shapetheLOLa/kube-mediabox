@@ -1,6 +1,8 @@
 statefulset:
   replicas: 1
   sonarr:
+    nodeSelector:
+      app: mediabox
     image:
       repository: linuxserver/sonarr
       tag: latest
@@ -17,3 +19,6 @@ service:
     protocol: TCP
     targetPort: 8989
   type: ClusterIP
+ingress:
+  rules:
+    host: sonarr.yourservice.xyz

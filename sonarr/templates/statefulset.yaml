@@ -19,7 +19,7 @@ spec:
         {{- include "sonarr.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - image: linuxserver/sonarr:latest
+      - image: {{ .Values.statefulset.sonarr.image.repository }}:{{ .Values.statefulset.sonarr.image.tag | default .Chart.AppVersion }}
         name: sonarr
         ports:
         - containerPort: 8989
@@ -30,7 +30,7 @@ spec:
         - mountPath: /mnt/
           name: media-pv-data
       nodeSelector:
-        app: mediabox
+        app: {{ .Values.statefulset.sonarr.nodeSelector.app }}
       terminationGracePeriodSeconds: 10
       volumes:
       - name: sonarr-config
