@@ -28,7 +28,7 @@ In my case plex and services have all the media mounted into /mnt/unionfs/Media/
 Plex has that folder mounted.
 Service that folder via NFS or change it accordingly if you want it on all worker nodes.
 
-Please change hostname of each service under service/templates/ingress.yaml
+Please change hostname of each service under service/values.yaml under ingress.rules.host.
 you will find e.g.````radarr.yourservice.xyz````
 Change it to your hostname, e.g. ```radarr.mediabox.xyz```
 TLS is activated, so this assumes you have letsencrypt running on your cluster.
