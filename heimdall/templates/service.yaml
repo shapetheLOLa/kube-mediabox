@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: {{ include "heimdall.fullname" . }}-service
   labels:
+    app: heimdall
   {{- include "heimdall.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}

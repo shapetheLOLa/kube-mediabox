@@ -10,3 +10,10 @@ service:
     protocol: TCP
     targetPort: 80
   type: ClusterIP
+ingress:
+  rules:
+    host: heimdall.yourservice.xyz
+    secretName: heimdall-tls
+    http:
+      service:
+        name: heimdall-service

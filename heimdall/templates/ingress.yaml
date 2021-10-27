@@ -13,16 +13,16 @@ metadata:
     nginx.org/proxy-read-timeout: 600s
 spec:
   rules:
-  - host: heimdall.jplex.xyz
+  - host: {{ .Values.ingress.rules.host }}
     http:
       paths:
       - backend:
           service:
-            name: heimdall-service
+            name: {{ .Values.ingress.rules.http.service.name }} 
             port:
               number: 6969
         pathType: ImplementationSpecific
   tls:
   - hosts:
-    - heimdall.jplex.xyz
-    secretName: heimdall-tls
+    - {{ .Values.ingress.rules.host }}
+    secretName: {{ .Values.ingress.rules.secretName }}
