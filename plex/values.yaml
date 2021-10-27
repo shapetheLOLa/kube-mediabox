@@ -1,6 +1,18 @@
-server:
+statefulset:
   plexServer:
     image:
       repository: plexinc/pms-docker
       tag: beta
   replicas: 1
+  spec:
+    containers:
+      env:
+        uid: 911
+        gid: 911
+        umask: 022
+        timezone: Europe/Berlin
+    volumes:
+      transcodePath: /mnt/local/transcode
+      mediaPath: /mnt/unionfs/Media
+    nodeSelector:
+      app: mediabox

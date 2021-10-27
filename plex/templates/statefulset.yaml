@@ -6,7 +6,7 @@ metadata:
     name: plex-server
   {{- include "plex.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.server.replicas }}
+  replicas: {{ .Values.statefulset.replicas }}
   selector:
     matchLabels:
       name: plex-server
@@ -21,16 +21,16 @@ spec:
       containers:
       - env:
         - name: PLEX_UID
-          value: "911"
+          value: "{{ .Values.statefulset.spec.containers.env.uid }}"
         - name: PLEX_GID
-          value: "911"
+          value: "{{ .Values.statefulset.spec.containers.env.gid }}"
         - name: VERSION
           value: docker
         - name: UMASK_SET
-          value: "022"
+          value: "{{ .Values.statefulset.spec.containers.env.umask }}"
         - name: TZ
-          value: Europe/Berlin
-        image: {{ .Values.server.plexServer.image.repository }}:{{ .Values.server.plexServer.image.tag
+          value: {{ .Values.statefulset.spec.containers.env.timezone }}
+        image: {{ .Values.statefulset.plexServer.image.repository }}:{{ .Values.statefulset.plexServer.image.tag
           | default .Chart.AppVersion }}
         imagePullPolicy: IfNotPresent
         livenessProbe:
@@ -48,16 +48,15 @@ spec:
         - mountPath: /data
           name: media
       hostNetwork: true
-# If you're using longhorn and can use plex on all the nodes please uncomment the next 2 lines for nodeSelector
       nodeSelector:
-        app: mediabox
+        app: {{ .Values.statefulset.spec.nodeSelector.app }}
       volumes:
       - name: plex-config
         persistentVolumeClaim:
           claimName: plex-config
       - name: plex-transcode
         hostPath:
-          path: /mnt/local/transcode
-      - hostPath:
-          path: /mnt/unionfs/Media
-        name: media
+          path: {{ .Values.statefulset.spec.volumes.transcodePath }}
+      - name: media
+        hostPath:
+          path: {{ .Values.statefulset.spec.volumes.mediaPath }}
