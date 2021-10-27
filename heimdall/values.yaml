@@ -1,4 +1,4 @@
-deployment:
+statefulset:
   heimdall:
     image:
       repository: linuxserver/heimdall

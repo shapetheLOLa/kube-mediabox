@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "sabnzbd.fullname" . }}-statefulset
+  labels:
+    app: sabnzbd
+  {{- include "sabnzbd.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.statefulset.replicas }}
+  selector:
+    matchLabels:
+      app: sabnzbd
+      {{- include "sabnzbd.selectorLabels" . | nindent 6 }}
+  serviceName: sabnzbd-service
+  template:
+    metadata:
+      labels:
+        app: sabnzbd
+        {{- include "sabnzbd.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - image: linuxserver/sabnzbd:latest
+        name: sabnzbd
+        ports:
+        - containerPort: 8080
+          name: sabnzbd
+        volumeMounts:
+        - mountPath: /config
+          name: sabnzbd-config
+        - mountPath: /mnt/
+          name: media-pv-data
+      nodeSelector:
+        app: mediabox
+      terminationGracePeriodSeconds: 10
+      volumes:
+      - name: sabnzbd-config
+        persistentVolumeClaim:
+           claimName: sabnzbd-config
+      - name: media-pv-data
+        persistentVolumeClaim:
+          claimName: media-pv-pvc-claim

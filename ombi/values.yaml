@@ -1,4 +1,4 @@
-deployment:
+statefulset:
   ombi:
     image:
       repository: linuxserver/ombi

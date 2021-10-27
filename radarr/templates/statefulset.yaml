@@ -1,29 +1,29 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: {{ include "radarr.fullname" . }}-deployment
+  name: {{ include "radarr.fullname" . }}-statefulset
   labels:
     app: radarr
   {{- include "radarr.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.deployment.replicas }}
+  replicas: {{ .Values.statefulset.replicas }}
   selector:
     matchLabels:
       app: radarr
-    {{- include "radarr.selectorLabels" . | nindent 6 }}
+      {{- include "radarr.selectorLabels" . | nindent 6 }}
+  serviceName: radarr-service
   template:
     metadata:
       labels:
         app: radarr
-      {{- include "radarr.selectorLabels" . | nindent 8 }}
+        {{- include "radarr.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - image: {{ .Values.deployment.radarr.image.repository }}:{{ .Values.deployment.radarr.image.tag
-          | default .Chart.AppVersion }}
+      - image: linuxserver/radarr:latest
         name: radarr
         ports:
         - containerPort: 7878
-        resources: {}
+          name: radarr
         volumeMounts:
         - mountPath: /config
           name: radarr-config
@@ -31,13 +31,11 @@ spec:
           name: media-pv-data
       nodeSelector:
         app: mediabox
+      terminationGracePeriodSeconds: 10
       volumes:
-#      - name: radarr-config
-#        persistentVolumeClaim:
-#           claimName: radarr-config
       - name: radarr-config
-        hostPath:
-          path: /config/radarr
+        persistentVolumeClaim:
+           claimName: radarr-config
       - name: media-pv-data
         persistentVolumeClaim:
           claimName: media-pv-pvc-claim

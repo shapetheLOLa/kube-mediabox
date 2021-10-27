@@ -1,29 +1,29 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: {{ include "sonarr.fullname" . }}-deployment
+  name: {{ include "sonarr.fullname" . }}-statefulset
   labels:
     app: sonarr
   {{- include "sonarr.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.deployment.replicas }}
+  replicas: {{ .Values.statefulset.replicas }}
   selector:
     matchLabels:
       app: sonarr
-    {{- include "sonarr.selectorLabels" . | nindent 6 }}
+      {{- include "sonarr.selectorLabels" . | nindent 6 }}
+  serviceName: sonarr-service
   template:
     metadata:
       labels:
         app: sonarr
-      {{- include "sonarr.selectorLabels" . | nindent 8 }}
+        {{- include "sonarr.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - image: {{ .Values.deployment.sonarr.image.repository }}:{{ .Values.deployment.sonarr.image.tag
-          | default .Chart.AppVersion }}
+      - image: linuxserver/sonarr:latest
         name: sonarr
         ports:
         - containerPort: 8989
-        resources: {{- toYaml .Values.deployment.sonarr.resources | nindent 10 }}
+          name: sonarr
         volumeMounts:
         - mountPath: /config
           name: sonarr-config
@@ -31,13 +31,11 @@ spec:
           name: media-pv-data
       nodeSelector:
         app: mediabox
+      terminationGracePeriodSeconds: 10
       volumes:
-#      - name: sonarr-config
-#        persistentVolumeClaim:
-#          claimName: sonarr-config
       - name: sonarr-config
-        hostPath:
-           path: /config/sonarr
+        persistentVolumeClaim:
+           claimName: sonarr-config
       - name: media-pv-data
         persistentVolumeClaim:
           claimName: media-pv-pvc-claim

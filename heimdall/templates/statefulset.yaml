@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "heimdall.fullname" . }}-statefulset
+  labels:
+    app: heimdall
+    {{- include "heimdall.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.statefulset.replicas }}
+  selector:
+    matchLabels:
+      app: heimdall
+      {{- include "heimdall.selectorLabels" . | nindent 6 }}
+  serviceName: heimdall-service
+  template:
+    metadata:
+      labels:
+        app: heimdall
+        {{- include "heimdall.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - image: {{ .Values.statefulset.heimdall.image.repository }}:{{ .Values.statefulset.heimdall.image.tag
+          | default .Chart.AppVersion }}
+        name: heimdall
+        ports:
+        - containerPort: 80
+          name: heimdall
+        volumeMounts:
+        - mountPath: /config
+          name: heimdall-config
+      terminationGracePeriodSeconds: 10
+      volumes:
+      - name: heimdall-config
+        persistentVolumeClaim:
+          claimName: heimdall-config

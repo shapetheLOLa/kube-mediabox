@@ -1,4 +1,4 @@
-deployment:
+statefulset:
   replicas: 1
   sabnzbd:
     image:

@@ -1,4 +1,4 @@
-deployment:
+statefulset:
   radarr:
     image:
       repository: linuxserver/radarr

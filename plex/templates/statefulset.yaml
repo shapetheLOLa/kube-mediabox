@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ include "plex.fullname" . }}-server
   labels:
@@ -11,6 +11,7 @@ spec:
     matchLabels:
       name: plex-server
     {{- include "plex.selectorLabels" . | nindent 6 }}
+  serviceName: plex-server
   template:
     metadata:
       labels:
@@ -42,18 +43,20 @@ spec:
         volumeMounts:
         - mountPath: /config
           name: plex-config
+        - mountPath: /transcode
+          name: plex-transcode
         - mountPath: /data
           name: media
       hostNetwork: true
-      nodeSelector:
-        app: mediabox
+#      nodeSelector:
+#        app: mediabox
       volumes:
-#      - name: plex-config
-#        persistentVolumeClaim:
-#          claimName: plex-config
       - name: plex-config
+        persistentVolumeClaim:
+          claimName: plex-config
+      - name: plex-transcode
         hostPath:
-          path: /config/plex
+          path: /mnt/local/transcode
       - hostPath:
           path: /mnt/unionfs/Media
         name: media
