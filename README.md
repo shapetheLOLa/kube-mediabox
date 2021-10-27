@@ -7,6 +7,7 @@ Services:
 
 plex  
 sabnzbd  
+heimdall  
 radarr  
 sonarr  
 ombi  
