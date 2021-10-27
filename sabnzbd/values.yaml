@@ -17,3 +17,6 @@ service:
     protocol: TCP
     targetPort: 8080
   type: ClusterIP
+ingress:
+  rules:
+    host: sabnzbd.yourservice.xyz
