@@ -48,8 +48,9 @@ spec:
         - mountPath: /data
           name: media
       hostNetwork: true
-#      nodeSelector:
-#        app: mediabox
+# If you're using longhorn and can use plex on all the nodes please uncomment the next 2 lines for nodeSelector
+      nodeSelector:
+        app: mediabox
       volumes:
       - name: plex-config
         persistentVolumeClaim:
