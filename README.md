@@ -29,8 +29,8 @@ Plex has that folder mounted.
 Service that folder via NFS or change it accordingly if you want it on all worker nodes.
 
 Please change hostname of each service under service/values.yaml under ingress.rules.host.
-you will find e.g.````radarr.yourservice.xyz````
-Change it to your hostname, e.g. ```radarr.mediabox.xyz```
+you will find e.g.````radarr.yourservice.xyz````  
+Change it to your hostname, e.g. ```radarr.mediabox.xyz```  
 TLS is activated, so this assumes you have letsencrypt running on your cluster.
 If you havent, delete the following on each ingress, e.g. service.yaml in /radarr:
 ```
