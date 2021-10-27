@@ -13,16 +13,16 @@ metadata:
     nginx.org/proxy-read-timeout: 600s
 spec:
   rules:
-  - host: ombi.yourservice.xyz
+  - host: {{ .Values.ingress.rules.host }} 
     http:
       paths:
       - backend:
           service:
-            name: ombi-service
+            name: {{ .Values.ingress.rules.http.service.name }} 
             port:
               number: 3579
         pathType: ImplementationSpecific
   tls:
   - hosts:
-    - ombi.yourservice.xyz
-    secretName: ombi-tls
+    - {{ .Values.ingress.rules.host }} 
+    secretName: {{ .Values.ingress.rules.secretName }} 

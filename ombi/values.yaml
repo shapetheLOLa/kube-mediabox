@@ -10,3 +10,10 @@ service:
     protocol: TCP
     targetPort: 3579
   type: ClusterIP
+ingress:
+  rules:
+    host: ombi.yourservice.xyz
+    secretName: ombi-tls
+    http:
+      service:
+        name: ombi-service
