@@ -47,6 +47,7 @@ First install the media-pv-pvc:
 
 Then install the services:
 
+``` helm install sabnzbd ./heimdall ```  
 ``` helm install sabnzbd ./sabnzbd ```  
 ``` helm install radarr ./radarr ```  
 ``` helm install sonarr ./sonarr ```  
